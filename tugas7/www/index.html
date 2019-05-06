@@ -1,0 +1,66 @@
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="css/ionic.css">
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {      
+        $("#insert").click(function() {
+            var nama = $("#nama").val();
+            var alamat = $("#alamat").val();
+            var nohp = $("#nohp").val();
+                 var dataString = "nama=" + nama + "&alamat=" + alamat + "&nohp=" + nohp +  "&insert=";
+            if ($.trim(nama).length > 0 & $.trim(alamat).length > 0 & $.trim(nohp).length > 0) {
+                $.ajax({
+                    type: "POST",
+                    url: "https://webservice20.000webhostapp.com/tugas7/www/insert.php",
+                    data: dataString,
+                    crossDomain: true,
+                    cache: false,
+                    beforeSend: function() {
+                        $("#insert").val('Connecting...');
+                    },
+                    success: function(data) {
+                        if (data == "success") {
+                            alert("Selesai");
+                            $("#insert").val('submit');
+                        } else if (data == "error") {
+                            alert("hilang atau eror");
+                        }
+                    }
+                });
+            }
+            return false;
+        });
+    });
+    </script>
+</head>
+
+<body>
+    <div class="bar bar-header bar-positive" style="margin-bottom:80px;">
+        <h1 class="title">Insert Database</h1>
+        <a class="button button-clear" href="readjson.html">Read JSON</a>
+    </div>
+    <br/>
+    <br/>
+    <div class="list">
+        <input type="hidden" id="id" value="" />
+        <div class="item">
+            <label>nama</label>
+            <input type="text" id="nama" value="" />
+        </div>
+        <div class="item"> 
+            <label>alamat</label>
+            <input type="text" id="alamat" value="" />
+        </div>
+        <div class="item">
+            <label>nohp</label>
+            <input type="text" id="nohp" value="" />
+        </div>
+        <div class="item">
+            <input type="button" id="insert" class="button button-block" value="insert"/>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,35 @@
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="css/ionic.css">
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        var url = "https://webservice20.000webhostapp.com/tugas7/www/json.php";
+        $.getJSON(url, function(result) {
+            console.log(result);
+            $.each(result, function(i, field) {
+                var id = field.id;
+                var nama=field.nama;
+                var alamat=field.alamat;
+                var nohp=field.nohp;
+                                
+                $("#listview").append("<a class='item' href='form.html?id=" + id + "&nama=" + nama + "&alamat=" + alamat + "&nohp=" + nohp + "'><h2>" + nama + " </h2><h2>" + alamat + " </h2><h2>" + nohp + " </h2>");
+            });
+        });
+    });
+    </script>
+</head>
+
+<body>
+    <div class="bar bar-header bar-positive" style="margin-bottom:80px;">
+        <a href="index.html" class="button button-clear">Home</a>
+        <h1 class="title">Read Database (JSON)</h1>
+    </div>
+    <br/>
+    <br/>
+    <ul class="list" id="listview">
+    </ul>
+</body>
+
+</html>
